@@ -80,6 +80,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -199,6 +201,231 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdventureWork\Address.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\AddressType.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\AdventureWork.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWork.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\AdventureWork.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\AdventureWork.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWork.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\AWBuildVersion.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\BillOfMaterials.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\BusinessEntity.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\BusinessEntityAddress.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\BusinessEntityContact.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ContactType.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\CountryRegion.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\CountryRegionCurrency.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\CreditCard.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Culture.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Currency.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\CurrencyRate.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Customer.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\DatabaseLog.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Department.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\EmailAddress.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Employee.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\EmployeeDepartmentHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\EmployeePayHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ErrorLog.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Illustration.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\JobCandidate.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Location.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Password.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Person.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\PersonCreditCard.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\PersonPhone.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\PhoneNumberType.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Product.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductCategory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductCostHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductDescription.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductDocument.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductInventory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductListPriceHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductModel.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductModelIllustration.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductModelProductDescriptionCulture.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductPhoto.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductProductPhoto.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductReview.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductSubcategory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ProductVendor.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\PurchaseOrderDetail.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\PurchaseOrderHeader.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesOrderDetail.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesOrderHeader.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesOrderHeaderSalesReason.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesPerson.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesPersonQuotaHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesReason.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesTaxRate.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesTerritory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SalesTerritoryHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ScrapReason.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Shift.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ShipMethod.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\ShoppingCartItem.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SpecialOffer.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\SpecialOfferProduct.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\StateProvince.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Store.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\TransactionHistory.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\TransactionHistoryArchive.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\UnitMeasure.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\Vendor.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\WorkOrder.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWork\WorkOrderRouting.cs">
+      <DependentUpon>AdventureWork.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -218,6 +445,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdventureWork\AdventureWork.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWork.edmx</DependentUpon>
+      <LastGenOutput>AdventureWork.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AdventureWork\AdventureWork.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWork.edmx</DependentUpon>
+      <LastGenOutput>AdventureWork.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -230,6 +467,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="AdventureWork\AdventureWork.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdventureWork.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="AdventureWork\AdventureWork.edmx.diagram">
+      <DependentUpon>AdventureWork.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -288,6 +532,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
