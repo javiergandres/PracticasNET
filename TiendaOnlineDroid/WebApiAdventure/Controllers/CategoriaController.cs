@@ -32,9 +32,13 @@ namespace WebApiAdventure.Controllers
                 categoria.CategoryName = item.Name;
                 catlist.Add(categoria);
             }
+            Categoria catOtros = new Categoria();
+            catOtros.CategoryID = 0;
+            catOtros.CategoryName = "Otros";
+            catlist.Add(catOtros);
 
 
-            if (catlist == null)
+            if (categorias == null)
             {
                 return NotFound();
             }
