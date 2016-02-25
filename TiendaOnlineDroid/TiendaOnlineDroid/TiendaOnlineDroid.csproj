@@ -53,6 +53,9 @@
     <Compile Include="Actividades\CarritoActivity.cs" />
     <Compile Include="Actividades\ProductosActivity.cs" />
     <Compile Include="Actividades\MainActivity.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\SubCategoria.cs" />
     <Compile Include="ProductoAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,15 +86,7 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebApiAdventure\WebApiAdventure.csproj">
-      <Project>{a487c8b9-97a1-4ceb-abbd-a0d170585ad2}</Project>
-      <Name>WebApiAdventure</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
