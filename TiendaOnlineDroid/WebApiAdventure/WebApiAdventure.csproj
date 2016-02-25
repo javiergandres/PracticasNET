@@ -442,8 +442,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\SubCategoria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -478,6 +481,7 @@
     <Content Include="AdventureWork\AdventureWork.edmx.diagram">
       <DependentUpon>AdventureWork.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\TiendaWebLocal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
