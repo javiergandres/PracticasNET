@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApiAdventure.AdventureWork;
+using WebApiAdventure.Models;
 
 namespace WebApiAdventure.Controllers
 {
@@ -16,89 +17,46 @@ namespace WebApiAdventure.Controllers
     {
         private AdWorksEntities db = new AdWorksEntities();
 
-        // GET: api/Producto
-        public IQueryable<Product> GetProduct()
-        {
-            return db.Product;
-        }
-
         // GET: api/Producto/5
         [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProduct(int id)
+        public IHttpActionResult GetProduct(int idsubcat)
         {
-            Product product = db.Product.Find(id);
-            if (product == null)
+            int? idSubCategoria;
+            List<Product> listaProduct;
+            List<Producto> listaDeProductos = new List<Producto>();
+
+            if (idsubcat == 0)
+            {
+                idSubCategoria = null;
+            }
+            else
+            {
+                idSubCategoria = idsubcat;
+            }
+
+            listaProduct = (from producto in db.Product
+                            where producto.ProductSubcategoryID == idSubCategoria
+                            select producto).ToList();
+
+            foreach(Product producto in listaProduct)
+            {
+                Producto p = new Producto();
+                p.ProductID = producto.ProductID;
+                p.Name = producto.Name;
+                p.ProductNumber = producto.ProductNumber;
+                p.Color = producto.Color;
+                p.StandarCost = producto.StandardCost;
+                listaDeProductos.Add(p);
+            }
+
+            if(listaDeProductos.Count == 0)
             {
                 return NotFound();
             }
-
-            return Ok(product);
-        }
-
-        // PUT: api/Producto/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProduct(int id, Product product)
-        {
-            if (!ModelState.IsValid)
+            else
             {
-                return BadRequest(ModelState);
+                return Ok(listaDeProductos);
             }
-
-            if (id != product.ProductID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(product).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Producto
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult PostProduct(Product product)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Product.Add(product);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductID }, product);
-        }
-
-        // DELETE: api/Producto/5
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult DeleteProduct(int id)
-        {
-            Product product = db.Product.Find(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            db.Product.Remove(product);
-            db.SaveChanges();
-
-            return Ok(product);
         }
 
         protected override void Dispose(bool disposing)
@@ -108,11 +66,6 @@ namespace WebApiAdventure.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool ProductExists(int id)
-        {
-            return db.Product.Count(e => e.ProductID == id) > 0;
         }
     }
 }

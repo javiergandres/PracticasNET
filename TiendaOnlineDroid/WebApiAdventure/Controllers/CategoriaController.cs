@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApiAdventure.AdventureWork;
+using WebApiAdventure.Models;
 
 namespace WebApiAdventure.Controllers
 {
@@ -22,14 +23,23 @@ namespace WebApiAdventure.Controllers
         {
             var categorias = from cat in db.ProductCategory
                              select cat;
-            List<ProductCategory> catlist = categorias.ToList();
+          
+            List<Categoria> catlist = new List<Categoria>();
+            foreach(var item in categorias)
+            {
+                Categoria categoria = new Categoria();
+                categoria.CategoryID = item.ProductCategoryID;
+                categoria.CategoryName = item.Name;
+                catlist.Add(categoria);
+            }
 
-            if (categorias == null)
+
+            if (catlist == null)
             {
                 return NotFound();
             }
 
-            return Ok(categorias);
+            return Ok(catlist);
         }
 
         protected override void Dispose(bool disposing)
