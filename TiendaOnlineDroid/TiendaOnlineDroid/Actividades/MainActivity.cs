@@ -21,6 +21,8 @@ namespace TiendaOnlineDroid
         public string categoria = "categoria";
         public string subcategoria = "subcategoria?idcat=";
         public string productos = "producto?idsubcat=";
+        public List<string> listaNombreCategorias = new List<string>();
+        public List<string> listaNombreSubcategorias = new List<string>();
         public List<Categoria> listaCategorias = new List<Categoria>();
         public List<SubCategoria> listaSubcategorias = new List<SubCategoria>();
         public List<Producto> listaProductos = new List<Producto>();
@@ -35,7 +37,7 @@ namespace TiendaOnlineDroid
             string peticion = url + categoria;
             PeticionCategoria(peticion); 
 
-            ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, Android.Resource.Layout.SimpleListItem1, listaCategorias.ToArray());
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listaNombreCategorias.ToArray());
 
             Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerCategoria);
             spin.Adapter = adapter;
@@ -43,8 +45,36 @@ namespace TiendaOnlineDroid
         }
         private void spin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
+            Spinner s = (Spinner)sender;
+            String nombre = (string)s.GetItemAtPosition(e.Position);
+            int id;
 
+            foreach (Categoria c in listaCategorias)
+            {
+                if (c.CategoryName == nombre)
+                {
+                    id = c.CategoryID;
+                }
+            }
+
+            string peticion = url + subcategoria;
+            PeticionSubcategoria(peticion);
+
+            //var listeq = (from equipos in listaEquipos
+            //              where equipos.yearID == ano
+            //              select equipos);
+
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listaNombreSubcategorias.ToArray());
+            Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerSubcategoria);
+            spin.Adapter = adapter;
+            spin.ItemSelected += spinSub_ItemSelected;
         }
+
+        private void spinSub_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void PeticionCategoria(string url)
         {
             try
@@ -59,24 +89,48 @@ namespace TiendaOnlineDroid
                     {
                         JsonValue jsonDoc =  JsonObject.Load(stream);
 
-                        //var datos = jsonDoc["Search"];
-                        //arrayCategorias = new Categoria[datos.Count];
-                        //for (int i = 0; i < datos.Count; i++)
-                        //{
-                        //    Categoria cat = new Categoria();
-                        //    if (cat.CategoryID != 0)
-                        //    {
-                        //        cat.CategoryID = datos[i]["CategoryID"];
-                        //        cat.CategoryName = datos[i]["CategoryName"];
-                        //        arrayCategorias[i] = cat;
-                        //    }
-                        //}
                         foreach (JsonValue datos in jsonDoc)
                         {
                             Categoria cat = new Categoria();
                             cat.CategoryID = datos["CategoryID"];
                             cat.CategoryName = datos["CategoryName"];
                             listaCategorias.Add(cat);
+                            listaNombreCategorias.Add(cat.CategoryName);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                var aviso = new AlertDialog.Builder(this);
+                aviso.SetMessage("Cateoria no encontrada");
+                aviso.SetNegativeButton("Aceptar", delegate { });
+                aviso.Show();
+            }
+        }
+
+        private void PeticionSubcategoria(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+                request.ContentType = "application/json";
+                request.Method = "GET";
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        JsonValue jsonDoc = JsonObject.Load(stream);
+
+                        foreach (JsonValue datos in jsonDoc)
+                        {
+                            SubCategoria subcat = new SubCategoria();
+                            subcat.CategoryID = datos["CategoryID"];
+                            subcat.SubCategoryID = datos["SubCategoryID"];
+                            subcat.SubCategoryName = datos["SubCategoryName"];
+                            listaSubcategorias.Add(subcat);
+                            listaNombreSubcategorias.Add(subcat.SubCategoryName);
                         }
                     }
                 }
