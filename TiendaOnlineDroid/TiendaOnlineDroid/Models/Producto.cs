@@ -5,8 +5,9 @@ using System.Linq;
 
 namespace TiendaOnlineDroid.Models
 {
-    public class Producto
+    public class Producto : Java.Lang.Object
     {
+      
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string ProductNumber { get; set; }

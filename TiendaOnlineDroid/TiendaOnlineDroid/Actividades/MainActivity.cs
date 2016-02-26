@@ -11,6 +11,7 @@ using System.Net;
 using System.Json;
 using System.IO;
 using System.Threading.Tasks;
+using TiendaOnlineDroid.Actividades;
 
 namespace TiendaOnlineDroid
 {
@@ -47,7 +48,7 @@ namespace TiendaOnlineDroid
         {
             Spinner s = (Spinner)sender;
             String nombre = (string)s.GetItemAtPosition(e.Position);
-            int id;
+            int id=0;
 
             foreach (Categoria c in listaCategorias)
             {
@@ -56,13 +57,17 @@ namespace TiendaOnlineDroid
                     id = c.CategoryID;
                 }
             }
-
-            string peticion = url + subcategoria;
-            PeticionSubcategoria(peticion);
-
-            //var listeq = (from equipos in listaEquipos
-            //              where equipos.yearID == ano
-            //              select equipos);
+            if (nombre!="Otros")
+            {
+                string peticion = url + subcategoria+ id.ToString();
+                listaNombreSubcategorias.Clear();
+                PeticionSubcategoria(peticion);
+            }
+            else
+            {
+                listaNombreSubcategorias.Clear();
+                listaNombreSubcategorias.Add("Sin subcategorías");
+            }
 
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listaNombreSubcategorias.ToArray());
             Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerSubcategoria);
@@ -72,7 +77,22 @@ namespace TiendaOnlineDroid
 
         private void spinSub_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            throw new NotImplementedException();
+            //Spinner s = (Spinner)sender;
+            //String nombre = (string)s.GetItemAtPosition(e.Position);
+            //int id = 0;
+            //foreach (SubCategoria sc in listaSubcategorias)
+            //{
+            //    id = sc.SubCategoryID;
+            //}
+
+            //Intent intent = new Intent(this, typeof(ProductosActivity));
+            //intent.PutExtra("title", pelicula.Title);
+            //intent.PutExtra("year", pelicula.Year);
+            //intent.PutExtra("imdbID", pelicula.ImdbID);
+            //intent.PutExtra("type", pelicula.Type);
+            //intent.PutExtra("poster", pelicula.Poster);
+
+            //StartActivity(intent);
         }
 
         private void PeticionCategoria(string url)
