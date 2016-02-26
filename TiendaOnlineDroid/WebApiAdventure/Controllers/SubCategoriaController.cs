@@ -20,9 +20,10 @@ namespace WebApiAdventure.Controllers
       
 
         // GET: api/SubCategoria/5
-        [ResponseType(typeof(ProductSubcategory))]
+        [ResponseType(typeof(SubCategoria))]
         public IHttpActionResult GetProductSubcategory(int idcat)
         {
+
             var subcategorias = from subcat in db.ProductSubcategory
                                 where subcat.ProductCategoryID == idcat
                                 select subcat;
