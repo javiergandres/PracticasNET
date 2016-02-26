@@ -12,7 +12,51 @@ using Android.Widget;
 
 namespace TiendaOnlineDroid
 {
-    class ProductoAdapter
+    public class ProductoAdapter
     {
+        //Producto[] items;
+        //Activity context;
+
+        //public ListaProductosAdapter(Activity context, Producto[] items) : base()
+        //{
+        //    this.context = context;
+        //    this.items = items;
+        //}
+
+        //public override Producto this[int position]
+        //{
+        //    get
+        //    {
+        //        if (position < items.Length)
+        //        {
+        //            return items[position];
+        //        }
+        //        return null;
+        //    }
+        //}
+
+        //public override int Count
+        //{
+        //    get
+        //    {
+        //        return items.Length; ;
+        //    }
+        //}
+
+        //public override long GetItemId(int position)
+        //{
+        //    return position;
+        //}
+
+        //public override View GetView(int position, View convertView, ViewGroup parent)
+        //{
+        //    View view = convertView;
+        //    if (view == null)
+
+        //        view = context.LayoutInflater.Inflate(Resource.Layout.Productos, null);
+        //    view.FindViewById<TextView>(Resource.Id.NombreProducto).Text = items[position].Name;
+        //    return view;
+
+        //}
     }
 }
