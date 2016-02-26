@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actividades\CarritoActivity.cs" />
+    <Compile Include="Actividades\DetalleActivity.cs" />
     <Compile Include="Actividades\ProductosActivity.cs" />
     <Compile Include="Actividades\MainActivity.cs" />
     <Compile Include="ListaProductosAdapter.cs" />
