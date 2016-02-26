@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+
 
 
 namespace WebApiAdventure.Models
@@ -12,5 +14,6 @@ namespace WebApiAdventure.Models
         public string ProductNumber { get; set; }
         public string Color { get; set; }
         public decimal StandardCost { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

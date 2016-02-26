@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -45,7 +47,7 @@ namespace WebApiAdventure.Controllers
                 p.Name = producto.Name;
                 p.ProductNumber = producto.ProductNumber;
                 p.Color = producto.Color;
-                p.StandarCost = producto.StandardCost;
+                p.StandardCost = producto.StandardCost;
                 listaDeProductos.Add(p);
             }
 
@@ -62,17 +64,23 @@ namespace WebApiAdventure.Controllers
         [ResponseType(typeof(Producto))]
         public IHttpActionResult GetProductDetail(int idpro)
         {
-            var product= (from pro in db.Product
-                                where pro.ProductID == idpro
-                                select pro).FirstOrDefault();
+            var product = (from pro in db.Product
+                          join proproph in db.ProductProductPhoto on pro.ProductID equals proproph.ProductID
+                          join proph in db.ProductPhoto on proproph.ProductPhotoID equals proph.ProductPhotoID
+                          where pro.ProductID == idpro                         
+                          select new {pro, proph.LargePhoto,proph.LargePhotoFileName}).FirstOrDefault();
 
             Producto producto = new Producto();
-            producto.ProductID = product.ProductID;
-            producto.Name = product.Name;
-            producto.Color = product.Color;
-            producto.StandarCost = product.StandardCost;
-            producto.ProductNumber = product.ProductNumber;
-          
+            producto.ProductID = product.pro.ProductID;
+            producto.Name = product.pro.Name;
+            producto.Color = product.pro.Color;
+            producto.StandardCost = product.pro.StandardCost;
+            producto.ProductNumber = product.pro.ProductNumber;
+            producto.ImageUrl = "http:\\BECA1\\Images\\" + product.LargePhotoFileName;
+            SaveImage(product.LargePhoto, product.LargePhotoFileName);
+
+
+
 
             if (product==null)
             {
@@ -90,5 +98,25 @@ namespace WebApiAdventure.Controllers
             }
             base.Dispose(disposing);
         }
+        public void SaveImage (Byte[] ImgBytes, string ImageName)
+
+        {
+
+            Bitmap imagen = null;
+
+            Byte[] bytes = (Byte[])(ImgBytes);
+
+            MemoryStream ms = new MemoryStream(bytes);
+
+            imagen = new Bitmap(ms);
+
+            string path = "C:\\inetpub\\wwwroot\\Images\\";
+            imagen.Save(path + ImageName);
+
+
+
+
+        }
+
     }
 }
