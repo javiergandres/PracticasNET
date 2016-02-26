@@ -13,13 +13,22 @@ using Android.Widget;
 namespace TiendaOnlineDroid.Actividades
 {
     [Activity(Label = "CarritoActivity")]
-    public class CarritoActivity : Activity
+    public class CarritoActivity : ListActivity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+        var id = Intent.Extras.GetStringArrayList("id");
+        var name = Intent.Extras.GetStringArrayList("name");
+        var StandarCost = Intent.Extras.GetStringArrayList("StandarCost");
 
-            // Create your application here
-        }
+        string filaCarrito = name + " " + StandarCost;
+
+        this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, id);
+
+
+
+
+
+
+        //var phoneNumbers = Intent.Extras.GetStringArrayList("phone_numbers") ?? new string[0];
+        //    this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, phoneNumbers);
     }
 }
