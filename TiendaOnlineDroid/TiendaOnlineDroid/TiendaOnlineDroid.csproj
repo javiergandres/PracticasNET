@@ -53,6 +53,7 @@
     <Compile Include="Actividades\CarritoActivity.cs" />
     <Compile Include="Actividades\ProductosActivity.cs" />
     <Compile Include="Actividades\MainActivity.cs" />
+    <Compile Include="ListaProductosAdapter.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\SubCategoria.cs" />
@@ -71,6 +72,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DetalleProducto.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\productoclic.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

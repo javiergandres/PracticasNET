@@ -26,23 +26,19 @@ namespace TiendaOnlineDroid.Actividades
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.Productos);
 
             //TODO rellenar array
-            string peticion = url;
-            PeticionCategoria(peticion);
+            Peticion(url);
 
-            ArrayAdapter<Producto> adapter = new ArrayAdapter<Producto>(this, Android.Resource.Layout.SimpleListItem1, listaProductos.ToArray());
-
-            Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerCategoria);
-            spin.Adapter = adapter;
-            spin.ItemSelected += spin_ItemSelected;
+            ListView vista = FindViewById<ListView>(Resource.Id.listProducto);
+            ListaProductosAdapter adapter = new ListaProductosAdapter(this, listaProductos.ToArray());
+            vista.Adapter = adapter;
+            
+       
         }
-        private void spin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
 
-        }
-        private void PeticionCategoria(string url)
+        private void Peticion(string url)
         {
             try
             {
@@ -84,7 +80,7 @@ namespace TiendaOnlineDroid.Actividades
             catch (Exception e)
             {
                 var aviso = new AlertDialog.Builder(this);
-                aviso.SetMessage("Categoria no encontrada");
+                aviso.SetMessage("Producto no encontrado");
                 aviso.SetNegativeButton("Aceptar", delegate { });
                 aviso.Show();
             }

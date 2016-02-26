@@ -123,7 +123,7 @@ namespace TiendaOnlineDroid
             catch (Exception e)
             {
                 var aviso = new AlertDialog.Builder(this);
-                aviso.SetMessage("Cateoria no encontrada");
+                aviso.SetMessage("Categoria no encontrada");
                 aviso.SetNegativeButton("Aceptar", delegate { });
                 aviso.Show();
             }
@@ -158,7 +158,7 @@ namespace TiendaOnlineDroid
             catch (Exception e)
             {
                 var aviso = new AlertDialog.Builder(this);
-                aviso.SetMessage("Cateoria no encontrada");
+                aviso.SetMessage("Categoria no encontrada");
                 aviso.SetNegativeButton("Aceptar", delegate { });
                 aviso.Show();
             }
