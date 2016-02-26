@@ -15,13 +15,13 @@ namespace TiendaOnlineDroid.Actividades
     [Activity(Label = "CarritoActivity")]
     public class CarritoActivity : ListActivity
     {
-        var id = Intent.Extras.GetStringArrayList("id");
-        var name = Intent.Extras.GetStringArrayList("name");
-        var StandarCost = Intent.Extras.GetStringArrayList("StandarCost");
+        //var id = Intent.Extras.GetStringArrayList("id");
+        //var name = Intent.Extras.GetStringArrayList("name");
+        //var StandarCost = Intent.Extras.GetStringArrayList("StandarCost");
 
-        string filaCarrito = name + " " + StandarCost;
+        //string filaCarrito = name + " " + StandarCost;
 
-        this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, id);
+        //this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, id);
 
 
 

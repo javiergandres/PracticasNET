@@ -24,32 +24,38 @@ namespace TiendaOnlineDroid.Actividades
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            var id = Intent.Extras.GetString("id");
+
+            url += id;
+
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.DetalleProducto);
-            List<Producto> lista = cargarDetalle(json);
+           
             JsonValue json = await FechtDetalle(url);
 
-            ProductoAdapter adapter = new ProductoAdapter(lista.ToArray(), this);
+            Producto  producto = cargarDetalle(json);
 
+            FindViewById<TextView>(Resource.Id.ProductID).Text = producto.ProductID.ToString();
+            FindViewById<TextView>(Resource.Id.Name).Text = producto.Name;
+            FindViewById<TextView>(Resource.Id.ProductNumber).Text = producto.ProductNumber;
+            FindViewById<TextView>(Resource.Id.Color).Text = producto.Color;
+            FindViewById<TextView>(Resource.Id.StandarCost).Text = producto.StandardCost.ToString();
 
         }
 
-        private List<Producto> cargarDetalle(JsonValue json)
+        private Producto cargarDetalle(JsonValue json)
         {
-            List<Producto> productos = new List<Producto>();
-            foreach (JsonValue item in json)
-            {
+            Producto producto = new Producto();
+                        
                 Producto product = new Producto();
-                product.ProductID = item["ProductID"];
-                product.Name = item["Name"];
-                product.ProductNumber = item["ProductNumber"];
-                product.Color = item["Color"];
-                product.StandardCost = ["StandardCost"];
-
-                productos.Add(product);
-            }
-            return productos;
+                product.ProductID = json["ProductID"];
+                product.Name = json["Name"];
+                product.ProductNumber = json["ProductNumber"];
+                product.Color = json["Color"];
+                product.StandardCost = json["StandardCost"];              
+            
+            return product;
         }
 
         private async Task<JsonValue> FechtDetalle(string url)
