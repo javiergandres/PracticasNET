@@ -27,15 +27,39 @@ namespace TiendaOnlineDroid.Actividades
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Productos);
+            var ids = Intent.Extras.GetString("ids");
 
             //TODO rellenar array
-            Peticion(url);
+            string peticion = url + ids;
+            Peticion(peticion);
 
             ListView vista = FindViewById<ListView>(Resource.Id.listProducto);
             ListaProductosAdapter adapter = new ListaProductosAdapter(this, listaProductos.ToArray());
             vista.Adapter = adapter;
+
+            vista.ItemClick += Vista_itemclick;
             
        
+        }
+
+        private void Vista_itemclick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            ListView l = (ListView)sender;
+            String nombre = (string)l.GetItemAtPosition(e.Position);
+
+            Producto product = new Producto();
+            foreach (Producto p in listaProductos)
+            {
+                if (p.Name == nombre)
+                {
+                    product = p;
+                }
+            }
+            Intent intent = new Intent(this, typeof(DetalleActivity));
+            Producto env = product;
+            intent.PutExtra("producto", env);
+
+            StartActivity(intent);
         }
 
         private void Peticion(string url)
@@ -52,18 +76,7 @@ namespace TiendaOnlineDroid.Actividades
                     {
                         JsonValue jsonDoc = JsonObject.Load(stream);
 
-                        //var datos = jsonDoc["Search"];
-                        //arrayCategorias = new Categoria[datos.Count];
-                        //for (int i = 0; i < datos.Count; i++)
-                        //{
-                        //    Categoria cat = new Categoria();
-                        //    if (cat.CategoryID != 0)
-                        //    {
-                        //        cat.CategoryID = datos[i]["CategoryID"];
-                        //        cat.CategoryName = datos[i]["CategoryName"];
-                        //        arrayCategorias[i] = cat;
-                        //    }
-                        //}
+                       
                         foreach (JsonValue datos in jsonDoc)
                         {
                             Producto prod = new Producto();

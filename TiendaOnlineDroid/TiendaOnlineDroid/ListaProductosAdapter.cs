@@ -54,7 +54,7 @@ namespace TiendaOnlineDroid
             View view = convertView;
             if (view == null)
 
-                view = context.LayoutInflater.Inflate(Resource.Layout.Productos, null);
+                view = context.LayoutInflater.Inflate(Resource.Layout.productoclic, null);
             view.FindViewById<TextView>(Resource.Id.NombreProducto).Text = items[position].Name;
             return view;
 
