@@ -14,6 +14,7 @@ using System.IO;
 using TiendaOnlineDroid.Models;
 using System.Net;
 
+
 namespace TiendaOnlineDroid.Actividades
 {
     [Activity(Label = "ProductosActivity")]
@@ -45,8 +46,8 @@ namespace TiendaOnlineDroid.Actividades
         private void Vista_itemclick(object sender, AdapterView.ItemClickEventArgs e)
         {
             ListView l = (ListView)sender;
-            String nombre = (string)l.GetItemAtPosition(e.Position);
-
+            Producto pro = (Producto)l.GetItemAtPosition(e.Position);
+            string nombre = pro.Name;
             Producto product = new Producto();
             foreach (Producto p in listaProductos)
             {
@@ -57,7 +58,10 @@ namespace TiendaOnlineDroid.Actividades
             }
             Intent intent = new Intent(this, typeof(DetalleActivity));
             Producto env = product;
-            intent.PutExtra("producto", env);
+            intent.PutExtra("nombre", env.Name);
+            intent.PutExtra("precio", env.StandardCost.ToString());
+            intent.PutExtra("id", env.ProductID);
+
 
             StartActivity(intent);
         }

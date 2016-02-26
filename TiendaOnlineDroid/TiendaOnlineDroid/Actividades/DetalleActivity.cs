@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using TiendaOnlineDroid.Models;
 
 namespace TiendaOnlineDroid.Actividades
 {
@@ -24,7 +25,7 @@ namespace TiendaOnlineDroid.Actividades
             SetContentView(Resource.Layout.DetalleProducto);
 
             GetDetalle(url);
-
+            
         }
 
         private void GetDetalle(string url)
