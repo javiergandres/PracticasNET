@@ -27,6 +27,7 @@ namespace TiendaOnlineDroid
         public List<Categoria> listaCategorias = new List<Categoria>();
         public List<SubCategoria> listaSubcategorias = new List<SubCategoria>();
         public List<Producto> listaProductos = new List<Producto>();
+        public int ids = 0;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -43,7 +44,21 @@ namespace TiendaOnlineDroid
             Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerCategoria);
             spin.Adapter = adapter;
             spin.ItemSelected += spin_ItemSelected;
+
+            Button productosBoton = FindViewById<Button>(Resource.Id.enviarIdscateroria);
+            productosBoton.Click += enviar_IdSC;
         }
+
+        private void enviar_IdSC(object sender, EventArgs e)
+        {
+
+            Intent intent = new Intent(this, typeof(ProductosActivity));
+            string env = ids.ToString();
+            intent.PutExtra("ids",env);
+            
+            StartActivity(intent);
+        }
+
         private void spin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner s = (Spinner)sender;
@@ -65,34 +80,33 @@ namespace TiendaOnlineDroid
             }
             else
             {
+                
                 listaNombreSubcategorias.Clear();
                 listaNombreSubcategorias.Add("Sin subcategorías");
+                ids = 0;
             }
 
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listaNombreSubcategorias.ToArray());
-            Spinner spin = FindViewById<Spinner>(Resource.Id.spinnerSubcategoria);
-            spin.Adapter = adapter;
-            spin.ItemSelected += spinSub_ItemSelected;
+            Spinner sspin = FindViewById<Spinner>(Resource.Id.spinnerSubcategoria);
+            sspin.Adapter = adapter;
+            sspin.ItemSelected += spinSub_ItemSelected;
         }
 
         private void spinSub_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            //Spinner s = (Spinner)sender;
-            //String nombre = (string)s.GetItemAtPosition(e.Position);
-            //int id = 0;
-            //foreach (SubCategoria sc in listaSubcategorias)
-            //{
-            //    id = sc.SubCategoryID;
-            //}
+            Spinner s = (Spinner)sender;
+            String nombre = (string)s.GetItemAtPosition(e.Position);
+           
+            foreach (SubCategoria sc in listaSubcategorias)
+            {
+                if (nombre==sc.SubCategoryName)
+                {
+                    ids = sc.SubCategoryID;
+                }
+            
+            }
 
-            //Intent intent = new Intent(this, typeof(ProductosActivity));
-            //intent.PutExtra("title", pelicula.Title);
-            //intent.PutExtra("year", pelicula.Year);
-            //intent.PutExtra("imdbID", pelicula.ImdbID);
-            //intent.PutExtra("type", pelicula.Type);
-            //intent.PutExtra("poster", pelicula.Poster);
-
-            //StartActivity(intent);
+           
         }
 
         private void PeticionCategoria(string url)
@@ -131,6 +145,7 @@ namespace TiendaOnlineDroid
 
         private void PeticionSubcategoria(string url)
         {
+            listaSubcategorias.Clear();
             try
             {
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
