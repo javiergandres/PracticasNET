@@ -18,7 +18,7 @@ namespace WebApiAdventure.Controllers
         private AdWorksEntities db = new AdWorksEntities();
 
         // GET: api/Categoria
-        [ResponseType(typeof(Categoria))]
+        [ResponseType(typeof(ProductCategory))]
         public IHttpActionResult GetProduct()
         {
             var categorias = from cat in db.ProductCategory
