@@ -27,7 +27,7 @@ namespace TiendaOnlineDroid.Actividades
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Productos);
+            SetContentView(Resource.Layout.Productoss);
             var ids = Intent.Extras.GetString("ids");
 
             //TODO rellenar array

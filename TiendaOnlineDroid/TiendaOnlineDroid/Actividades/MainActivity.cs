@@ -15,7 +15,7 @@ using TiendaOnlineDroid.Actividades;
 
 namespace TiendaOnlineDroid
 {
-    [Activity(Label = "TiendaOnlineDroid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "TiendaOnlineDroid", MainLauncher = true, Icon = "@drawable/icon", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
     public class MainActivity : Activity
     {
         public string url = "http://beca1/api/";

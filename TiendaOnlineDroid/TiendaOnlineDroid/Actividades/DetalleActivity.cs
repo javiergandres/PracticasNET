@@ -24,7 +24,7 @@ namespace TiendaOnlineDroid.Actividades
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            var id = Intent.Extras.GetString("id");
+            var id = Intent.Extras.GetInt("id");
 
             url += id;
 
@@ -35,13 +35,32 @@ namespace TiendaOnlineDroid.Actividades
             JsonValue json = await FechtDetalle(url);
 
             Producto  producto = cargarDetalle(json);
-
+            
             FindViewById<TextView>(Resource.Id.ProductID).Text = producto.ProductID.ToString();
             FindViewById<TextView>(Resource.Id.Name).Text = producto.Name;
             FindViewById<TextView>(Resource.Id.ProductNumber).Text = producto.ProductNumber;
             FindViewById<TextView>(Resource.Id.Color).Text = producto.Color;
             FindViewById<TextView>(Resource.Id.StandarCost).Text = producto.StandardCost.ToString();
 
+            Button boton = FindViewById<Button>(Resource.Id.buttonDetalle);
+            boton.Click += Boton_Click;
+
+        }
+
+        private void Boton_Click(object sender, EventArgs e)
+        {
+
+            Intent intent = new Intent(this, typeof(CarritoActivity));
+
+            string ID = FindViewById<TextView>(Resource.Id.ProductID).Text;
+            intent.PutExtra("id", ID);
+            intent.PutExtra("name", FindViewById<TextView>(Resource.Id.Name).Text);
+            intent.PutExtra("productNumber", FindViewById<TextView>(Resource.Id.ProductNumber).Text);
+            intent.PutExtra("color", FindViewById<TextView>(Resource.Id.Color).Text);
+            string Cost = FindViewById<TextView>(Resource.Id.StandarCost).Text;
+            intent.PutExtra("standarCost", Cost);
+
+            StartActivity(intent);
         }
 
         private Producto cargarDetalle(JsonValue json)
@@ -57,6 +76,8 @@ namespace TiendaOnlineDroid.Actividades
             
             return product;
         }
+
+
 
         private async Task<JsonValue> FechtDetalle(string url)
         {

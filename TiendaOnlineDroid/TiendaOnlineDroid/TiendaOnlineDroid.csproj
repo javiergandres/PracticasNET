@@ -66,10 +66,10 @@
     <None Include="GettingStarted.Xamarin" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\Carro.axml">
+    <AndroidResource Include="Resources\layout\Carross.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Productos.axml">
+    <AndroidResource Include="Resources\layout\Productoss.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DetalleProducto.axml">
