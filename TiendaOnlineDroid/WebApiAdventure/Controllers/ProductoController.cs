@@ -74,13 +74,10 @@ namespace WebApiAdventure.Controllers
             producto.ProductID = product.pro.ProductID;
             producto.Name = product.pro.Name;
             producto.Color = product.pro.Color;
-            producto.StandardCost = product.pro.StandardCost;
+            producto.StandardCost = Decimal.Round(product.pro.StandardCost,2);
             producto.ProductNumber = product.pro.ProductNumber;
-            producto.ImageUrl = "http:\\BECA1\\Images\\" + product.LargePhotoFileName;
+            producto.ImageUrl = "http:\\\\BECA1\\Images\\" + product.LargePhotoFileName;
             SaveImage(product.LargePhoto, product.LargePhotoFileName);
-
-
-
 
             if (product==null)
             {
@@ -112,9 +109,6 @@ namespace WebApiAdventure.Controllers
 
             string path = "C:\\inetpub\\wwwroot\\Images\\";
             imagen.Save(path + ImageName);
-
-
-
 
         }
 
