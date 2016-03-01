@@ -13,22 +13,37 @@ using Android.Widget;
 namespace TiendaOnlineDroid.Actividades
 {
     [Activity(Label = "CarritoActivity")]
-    public class CarritoActivity : ListActivity
+    public class CarritoActivity : Activity
     {
-        var id = Intent.Extras.GetStringArrayList("id");
-        var name = Intent.Extras.GetStringArrayList("name");
-        var StandarCost = Intent.Extras.GetStringArrayList("StandarCost");
+        List<string> lista = new List<string>();
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
 
-        string filaCarrito = name + " " + StandarCost;
+            SetContentView(Resource.Layout.Carross);
 
-        this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, id);
+            var id = Intent.Extras.GetString("id");
+            var name = Intent.Extras.GetString("name");
+            var standarCost = Intent.Extras.GetString("standarCost");
+            string filaCarrito ="Producto: " +name + ", Precio:  " + standarCost;
 
+            
 
+            lista.Add(filaCarrito);
+            ListView vista = FindViewById<ListView>(Resource.Id.listCarro);
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, lista.ToArray());
+            vista.Adapter = adapter;
 
+            Button botonback = FindViewById<Button>(Resource.Id.backMain);
+            botonback.Click += Botonback_Click;
 
+        }
 
+        private void Botonback_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+        }
 
-        //var phoneNumbers = Intent.Extras.GetStringArrayList("phone_numbers") ?? new string[0];
-        //    this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, phoneNumbers);
     }
 }
