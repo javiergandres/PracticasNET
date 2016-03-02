@@ -18,7 +18,7 @@ namespace TiendaOnlineDroid.Actividades
     [Activity(Label = "CarritoActivity")]
     public class CarritoActivity : Activity
     {
-        List<string> lista = new List<string>();
+        List<string> list = new List<string>();
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -32,14 +32,33 @@ namespace TiendaOnlineDroid.Actividades
 
             
 
-            lista.Add(filaCarrito);
+            list.Add(filaCarrito);
             ListView vista = FindViewById<ListView>(Resource.Id.listCarro);
-            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, lista.ToArray());
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, list.ToArray());
             vista.Adapter = adapter;
 
             Button botonback = FindViewById<Button>(Resource.Id.backMain);
             botonback.Click += Botonback_Click;
 
+            vista.LongClick += List_LongClick;
+
+        }
+
+        private void List_LongClick(object sender, View.LongClickEventArgs e)
+        {
+            ListView lista = (ListView)sender;
+            Producto producto = (Producto)lista.SelectedItem;
+            foreach (string nombre in list)
+            {
+                if (producto.Name == nombre)
+                {
+                    var aviso = new AlertDialog.Builder(this);
+                    aviso.SetMessage("¿Desea eliminar " + producto.Name + "?");
+                    aviso.SetPositiveButton("Aceptar", delegate { list.Remove(nombre);});
+                    aviso.SetNegativeButton("Cancelar", delegate { });
+                    aviso.Show();
+                }
+            }
         }
 
         private void Botonback_Click(object sender, EventArgs e)
