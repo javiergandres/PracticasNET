@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listProducto" />
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1">
+    <RelativeLayout
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/relativeLayout1">
+        <Button
+            p1:text="Anterior"
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/buttonAnterior"
+            p1:layout_alignParentLeft="true" />
+        <Button
+            p1:text="Siguiente"
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/buttonSiguiente"
+            p1:layout_alignParentRight="true" />
+        <TextView
+            p1:text="Medium Text"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/textoPagina"
+            p1:layout_toRightOf="@id/buttonAnterior"
+            p1:layout_toLeftOf="@id/buttonSiguiente"
+            p1:layout_centerVertical="true"
+            p1:gravity="center_horizontal" />
+    </RelativeLayout>
+    <LinearLayout
+        p1:orientation="vertical"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/linearLayout2">
+        <ListView
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="match_parent"
+            p1:layout_height="match_parent"
+            p1:id="@+id/listaProd" />
+    </LinearLayout>
 </LinearLayout>

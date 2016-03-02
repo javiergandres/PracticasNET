@@ -28,4 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/enviarIdscateroria" />
+    <Button
+        android:text="Ir al Carrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/irAlCarrito" />
 </LinearLayout>

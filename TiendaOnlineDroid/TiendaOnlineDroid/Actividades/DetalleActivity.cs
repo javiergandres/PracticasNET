@@ -22,21 +22,17 @@ namespace TiendaOnlineDroid.Actividades
     public class DetalleActivity : Activity
     {
         public string url = "http://beca1/api/producto?idpro=";
+        Producto producto;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            var id = Intent.Extras.GetInt("id");
-
-            url += id;
-
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.DetalleProducto);
-           
-            JsonValue json = await FechtDetalle(url);
 
-            Producto  producto = cargarDetalle(json);
-            InsertProductDb(producto);
+            var id = Intent.Extras.GetInt("id");
+            url += id;
+            JsonValue json = await FechtDetalle(url);
+            producto = cargarDetalle(json);
 
             
             FindViewById<TextView>(Resource.Id.ProductID).Text = producto.ProductID.ToString();
@@ -52,18 +48,15 @@ namespace TiendaOnlineDroid.Actividades
 
         private void Boton_Click(object sender, EventArgs e)
         {
-
-            Intent intent = new Intent(this, typeof(CarritoActivity));
-
-            string ID = FindViewById<TextView>(Resource.Id.ProductID).Text;
-            intent.PutExtra("id", ID);
-            intent.PutExtra("name", FindViewById<TextView>(Resource.Id.Name).Text);
-            intent.PutExtra("productNumber", FindViewById<TextView>(Resource.Id.ProductNumber).Text);
-            intent.PutExtra("color", FindViewById<TextView>(Resource.Id.Color).Text);
-            string Cost = FindViewById<TextView>(Resource.Id.StandarCost).Text;
-            intent.PutExtra("standarCost", Cost);
-
-            StartActivity(intent);
+            var aviso = new AlertDialog.Builder(this);
+            aviso.SetMessage("Se ha comprado el producto: " + producto.Name);
+            aviso.SetPositiveButton("Aceptar", delegate {
+                InsertProductDb(producto);
+                Intent intent = new Intent(this, typeof(MainActivity));
+                StartActivity(intent);
+            });
+            aviso.SetCancelable(false);
+            aviso.Show();
         }
 
         private Producto cargarDetalle(JsonValue json)
@@ -107,16 +100,27 @@ namespace TiendaOnlineDroid.Actividades
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
             var db = new SQLiteConnection(dbPath);
-
+            var table = db.Table<SQProduct>();
+          
+            var query = table.Where(p=>p.ProductID==producto.ProductID).Count();
             SQProduct prod = new SQProduct();
-            prod.Name = producto.Name;
-            prod.ProductID = producto.ProductID;
-            prod.StandardCost = producto.StandardCost;
-            prod.Color = producto.Color;
-            prod.ProductNumber = producto.ProductNumber;    
-                          
-            db.Insert(prod);
-                     
+            if(query==0)
+            {            
+                prod.Name = producto.Name;
+                prod.ProductID = producto.ProductID;
+                prod.StandardCost = producto.StandardCost;
+                prod.Color = producto.Color;
+                prod.ProductNumber = producto.ProductNumber;
+                prod.Cantidad = 1;
+                db.Insert(prod);
+            }
+            else
+            {
+                prod = table.Where(p => p.ProductID == producto.ProductID).FirstOrDefault();
+                prod.Cantidad = prod.Cantidad + 1;
+                db.Update(prod);
+            }
+                    
         }
     }
 }

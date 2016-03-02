@@ -15,12 +15,13 @@ namespace TiendaOnlineDroid.Models
 {
     public class SQProduct
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int ProductID { get; set; }
 
         public string Name { get; set; }
         public string ProductNumber { get; set; }
         public string Color { get; set; }
         public decimal StandardCost { get; set; }
+        public int Cantidad { get; set; }
     }
 }

@@ -49,7 +49,16 @@ namespace TiendaOnlineDroid
             Button productosBoton = FindViewById<Button>(Resource.Id.enviarIdscateroria);
             productosBoton.Click += enviar_IdSC;
             CreateDB();
+
+            Button irAlCarrito = FindViewById<Button>(Resource.Id.irAlCarrito);
+            irAlCarrito.Click += IrAlCarrito_Click;
             
+        }
+
+        private void IrAlCarrito_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(CarritoActivity));
+            StartActivity(intent);
         }
 
         private void enviar_IdSC(object sender, EventArgs e)

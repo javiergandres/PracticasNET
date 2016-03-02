@@ -5,61 +5,72 @@
     android:layout_height="match_parent">
     <TextView
         android:text="ProductID"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+        android:id="@+id/textView1"
+        android:textStyle="bold" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ProductID" />
+        android:id="@+id/ProductID"
+        android:backgroundTint="#ffe4c4ff"
+        android:textStyle="italic" />
     <TextView
         android:text="Name "
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:id="@+id/textView3"
+        android:textStyle="bold" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Name " />
+        android:id="@+id/Name "
+        android:textStyle="italic" />
     <TextView
         android:text="ProductNumber"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
+        android:id="@+id/textView5"
+        android:textStyle="bold" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ProductNumber" />
+        android:id="@+id/ProductNumber"
+        android:textStyle="italic" />
     <TextView
         android:text="Color"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView7" />
+        android:id="@+id/textView7"
+        android:textStyle="bold" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Color" />
+        android:id="@+id/Color"
+        android:textStyle="italic" />
     <TextView
         android:text="StandarCost"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9" />
+        android:id="@+id/textView9"
+        android:textStyle="bold" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/StandarCost" />
+        android:id="@+id/StandarCost"
+        android:textStyle="italic" />
     <Button
-        android:text="carro de compra"
+        android:text="Comprar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonDetalle" />

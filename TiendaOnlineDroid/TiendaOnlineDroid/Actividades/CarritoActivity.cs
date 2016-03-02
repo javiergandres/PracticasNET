@@ -18,47 +18,55 @@ namespace TiendaOnlineDroid.Actividades
     [Activity(Label = "CarritoActivity")]
     public class CarritoActivity : Activity
     {
-        List<string> list = new List<string>();
+        List<Producto> listProductos = new List<Producto>();
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Carross);
 
-            var id = Intent.Extras.GetString("id");
-            var name = Intent.Extras.GetString("name");
-            var standarCost = Intent.Extras.GetString("standarCost");
-            string filaCarrito ="Producto: " +name + ", Precio:  " + standarCost;
+            //var id = Intent.Extras.GetString("id");
+            //var name = Intent.Extras.GetString("name");
+            //var standarCost = Intent.Extras.GetString("standarCost");
+            //string filaCarrito ="Producto: " +name + ", Precio:  " + standarCost;
 
-            
+            listProductos = readCarritoDB();
 
-            list.Add(filaCarrito);
+            //listProductos.Add(filaCarrito);
             ListView vista = FindViewById<ListView>(Resource.Id.listCarro);
-            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, list.ToArray());
+            //ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, list.ToArray());
+            ProductoItemAdapter adapter = new ProductoItemAdapter(this, listProductos.ToArray());
             vista.Adapter = adapter;
 
             Button botonback = FindViewById<Button>(Resource.Id.backMain);
             botonback.Click += Botonback_Click;
 
-            vista.LongClick += List_LongClick;
+            vista.ItemLongClick += Vista_ItemLongClick;
 
         }
 
-        private void List_LongClick(object sender, View.LongClickEventArgs e)
+        private void Vista_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
             ListView lista = (ListView)sender;
-            Producto producto = (Producto)lista.SelectedItem;
-            foreach (string nombre in list)
+            Producto producto = (Producto)lista.GetItemAtPosition(e.Position);
+            foreach (Producto p in listProductos)
             {
-                if (producto.Name == nombre)
+                if (producto == p)
                 {
                     var aviso = new AlertDialog.Builder(this);
                     aviso.SetMessage("¿Desea eliminar " + producto.Name + "?");
-                    aviso.SetPositiveButton("Aceptar", delegate { list.Remove(nombre);});
+                    aviso.SetPositiveButton("Aceptar", delegate {
+                        deleteProductDb(p);
+                        listProductos = readCarritoDB();
+                        ProductoItemAdapter adapter = new ProductoItemAdapter(this, listProductos.ToArray());
+                        lista.Adapter = adapter;
+                    });
                     aviso.SetNegativeButton("Cancelar", delegate { });
                     aviso.Show();
                 }
             }
+
+            
         }
 
         private void Botonback_Click(object sender, EventArgs e)
@@ -80,9 +88,20 @@ namespace TiendaOnlineDroid.Actividades
                 producto.ProductNumber = prod.ProductNumber;
                 producto.StandardCost = prod.StandardCost;
                 producto.Color = prod.Color;
+                producto.Cantidad = prod.Cantidad;
                 productos.Add(producto);
             }
             return productos;
+        }
+
+        private void deleteProductDb(Producto producto)
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
+            SQProduct productosq = new SQProduct();
+            
+            var db = new SQLiteConnection(dbPath);
+            db.Delete<SQProduct>(producto.ProductID);
+            listProductos.Remove(producto);
         }
 
     }

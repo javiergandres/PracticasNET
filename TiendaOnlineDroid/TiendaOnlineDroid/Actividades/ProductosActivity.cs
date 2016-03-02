@@ -20,8 +20,14 @@ namespace TiendaOnlineDroid.Actividades
     [Activity(Label = "ProductosActivity")]
     public class ProductosActivity : Activity
     {
+        private static int ELEM_POR_PAG = 10;
+
+        TextView buttonSiguiente, buttonAnterior;
+        ListView listaProd;
+        TextView textoPagina;
+        List<Producto> listaProductos;
+        int indiceIni, indiceFin;
         public string url = "http://beca1/api/producto?idsubcat=";
-        public List<Producto> listaProductos = new List<Producto>();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,39 +37,73 @@ namespace TiendaOnlineDroid.Actividades
             var ids = Intent.Extras.GetString("ids");
 
             //TODO rellenar array
+            buttonSiguiente = FindViewById<TextView>(Resource.Id.buttonSiguiente);
+            buttonAnterior = FindViewById<TextView>(Resource.Id.buttonAnterior);
+            textoPagina = FindViewById<TextView>(Resource.Id.textoPagina);
+            listaProd = FindViewById<ListView>(Resource.Id.listaProd);
+            listaProductos = new List<Producto>();
+
             string peticion = url + ids;
             Peticion(peticion);
 
-            ListView vista = FindViewById<ListView>(Resource.Id.listProducto);
-            ListaProductosAdapter adapter = new ListaProductosAdapter(this, listaProductos.ToArray());
-            vista.Adapter = adapter;
+            buttonAnterior.Click += ButtonAnterior_Click;
+            buttonSiguiente.Click += ButtonSiguiente_Click;
 
-            vista.ItemClick += Vista_itemclick;
-            
-       
+            indiceIni = 0;
+            indiceFin = ELEM_POR_PAG - 1;
+            MostrarRangoProductos();
+
+            listaProd.ItemClick += Vista_itemclick;
+
+
+        }
+
+        private void ButtonSiguiente_Click(object sender, EventArgs e)
+        {
+            indiceIni += ELEM_POR_PAG;
+            indiceFin += ELEM_POR_PAG;
+            MostrarRangoProductos();
+        }
+
+        private void ButtonAnterior_Click(object sender, EventArgs e)
+        {
+            indiceIni -= ELEM_POR_PAG;
+            indiceFin -= ELEM_POR_PAG;
+            MostrarRangoProductos();
         }
 
         private void Vista_itemclick(object sender, AdapterView.ItemClickEventArgs e)
         {
             ListView l = (ListView)sender;
             Producto pro = (Producto)l.GetItemAtPosition(e.Position);
-            string nombre = pro.Name;
-            Producto product = new Producto();
-            foreach (Producto p in listaProductos)
-            {
-                if (p.Name == nombre)
-                {
-                    product = p;
-                }
-            }
-            Intent intent = new Intent(this, typeof(DetalleActivity));
-            Producto env = product;
-            intent.PutExtra("nombre", env.Name);
-            intent.PutExtra("precio", env.StandardCost.ToString());
-            intent.PutExtra("id", env.ProductID);
 
+            Intent intent = new Intent(this, typeof(DetalleActivity));
+            intent.PutExtra("id", pro.ProductID);
 
             StartActivity(intent);
+        }
+
+        private void MostrarRangoProductos()
+        {
+            indiceIni = (indiceIni < 0) ? 0 : indiceIni;
+            indiceIni = (indiceIni >= listaProductos.Count) ? listaProductos.Count - 1 : indiceIni;
+            indiceFin = (indiceFin < 0) ? 0 : indiceFin;
+            indiceFin = (indiceFin >= listaProductos.Count) ? listaProductos.Count - 1 : indiceFin;
+
+            Producto[] productos = listaProductos.GetRange(indiceIni, indiceFin - indiceIni + 1).ToArray();
+            ProductoItemAdapter adapter = new ProductoItemAdapter(this, productos);
+            listaProd.Adapter = adapter;
+
+            buttonAnterior.Enabled = (indiceIni == 0) ? false : true;
+            buttonSiguiente.Enabled = (indiceFin == listaProductos.Count - 1) ? false : true;
+
+
+            textoPagina.Text = (indiceIni + 1).ToString() + " - " + (indiceFin + 1).ToString() + " de " + listaProductos.Count.ToString();
+
+            if (indiceFin == listaProductos.Count - 1)
+            {
+                indiceFin = (indiceIni + ELEM_POR_PAG - 1);
+            }
         }
 
         private void Peticion(string url)

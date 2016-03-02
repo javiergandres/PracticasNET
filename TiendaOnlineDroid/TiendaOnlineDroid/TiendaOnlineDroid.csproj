@@ -66,6 +66,7 @@
     <Compile Include="Models\SQProduct.cs" />
     <Compile Include="Models\SubCategoria.cs" />
     <Compile Include="ProductoAdapter.cs" />
+    <Compile Include="ProductoItemAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,15 +78,11 @@
     <AndroidResource Include="Resources\layout\Carross.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Productoss.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\DetalleProducto.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\productoclic.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DetalleProducto.axml" />
+    <AndroidResource Include="Resources\layout\Productoss.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
