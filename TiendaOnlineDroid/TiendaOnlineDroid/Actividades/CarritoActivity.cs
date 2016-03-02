@@ -9,6 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using TiendaOnlineDroid.Models;
+using SQLite;
+using System.IO;
 
 namespace TiendaOnlineDroid.Actividades
 {
@@ -43,6 +46,24 @@ namespace TiendaOnlineDroid.Actividades
         {
             var intent = new Intent(this, typeof(MainActivity));
             StartActivity(intent);
+        }
+        private List<Producto> readCarritoDB()
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
+            var db = new SQLiteConnection(dbPath);
+            List<Producto> productos = new List<Producto>();
+            var table = db.Table<SQProduct>();
+            foreach (SQProduct prod in table)
+            {
+                Producto producto = new Producto();
+                producto.ProductID = prod.ProductID;
+                producto.Name = prod.Name;
+                producto.ProductNumber = prod.ProductNumber;
+                producto.StandardCost = prod.StandardCost;
+                producto.Color = prod.Color;
+                productos.Add(producto);
+            }
+            return productos;
         }
 
     }

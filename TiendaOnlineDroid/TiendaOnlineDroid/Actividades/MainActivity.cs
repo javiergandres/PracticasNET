@@ -12,6 +12,7 @@ using System.Json;
 using System.IO;
 using System.Threading.Tasks;
 using TiendaOnlineDroid.Actividades;
+using SQLite;
 
 namespace TiendaOnlineDroid
 {
@@ -47,6 +48,8 @@ namespace TiendaOnlineDroid
 
             Button productosBoton = FindViewById<Button>(Resource.Id.enviarIdscateroria);
             productosBoton.Click += enviar_IdSC;
+            CreateDB();
+            InsertProduct();
         }
 
         private void enviar_IdSC(object sender, EventArgs e)
@@ -178,6 +181,34 @@ namespace TiendaOnlineDroid
                 aviso.Show();
             }
         }
+        public void CreateDB()
+        {
+          
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
+            var db = new SQLiteConnection(dbPath);
+            db.CreateTable<SQProduct>();
+            db.DeleteAll<SQProduct>();
+            
+            
+        }
+        //public void InsertProduct()
+        //{
+        //    string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
+        //    var db = new SQLiteConnection(dbPath);
+        //    SQProduct prod = new SQProduct();
+        //    prod.ProductID = 1;
+        //    prod.Name = "Marquitos";
+        //    db.Insert(prod);
+        //    var table = db.Table<SQProduct>();
+        //    List<string> productosCarrito = new List<string>();
+        //    foreach(SQProduct producto in table)
+        //    {
+        //        productosCarrito.Add(producto.Name);
+        //    }
+        //    int i = 0;
+        //}
+     
+
     }
 }
 
