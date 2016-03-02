@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using TiendaOnlineDroid.Models;
+using SQLite;
 
 namespace TiendaOnlineDroid.Actividades
 {
@@ -35,6 +36,8 @@ namespace TiendaOnlineDroid.Actividades
             JsonValue json = await FechtDetalle(url);
 
             Producto  producto = cargarDetalle(json);
+            InsertProductDb(producto);
+
             
             FindViewById<TextView>(Resource.Id.ProductID).Text = producto.ProductID.ToString();
             FindViewById<TextView>(Resource.Id.Name).Text = producto.Name;
@@ -99,6 +102,21 @@ namespace TiendaOnlineDroid.Actividades
                     return jsonDoc;
                 }
             }
+        }
+        public void InsertProductDb(Producto producto)
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "carrito.db3");
+            var db = new SQLiteConnection(dbPath);
+
+            SQProduct prod = new SQProduct();
+            prod.Name = producto.Name;
+            prod.ProductID = producto.ProductID;
+            prod.StandardCost = producto.StandardCost;
+            prod.Color = producto.Color;
+            prod.ProductNumber = producto.ProductNumber;    
+                          
+            db.Insert(prod);
+                     
         }
     }
 }
